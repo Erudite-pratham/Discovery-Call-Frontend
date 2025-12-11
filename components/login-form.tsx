@@ -19,6 +19,8 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
+import { log } from "console";
+import { loginAction } from "@/lib/actions/auth";
 
 export function LoginForm({
   className,
@@ -39,11 +41,13 @@ export function LoginForm({
         setIsLoading(false);
         return;
       }
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
-        { email, password },
-        { withCredentials: true, headers: { "Content-Type": "application/json" } }
-      );
+      // const response = await axios.post(
+      //   `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
+      //   { email, password },
+      //   { withCredentials: true, headers: { "Content-Type": "application/json" } }
+      // );
+
+      const response = await loginAction({ email, password });
 
       console.log("Login successful:", response);
 
